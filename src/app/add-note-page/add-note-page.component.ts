@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Note} from "../models/notes.model";
 
 @Component({
   selector: 'app-add-note-page',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-note-page.component.css']
 })
 export class AddNotePageComponent implements OnInit {
-
+  formTitle = 'Add Note';
+  note:Note = new Note("asd", "", "", "", "", 0);
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  btnSave_click(){
+
+  }
 }

@@ -1,1 +1,59 @@
-<p>add-note-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+        <div>
+          <label for="txtTitle" class="form-label">Note Title</label>
+          <input type="text" id="txtTitle" name="txtTitle" class="form-control"
+                 [(ngModel)]="note.title" #title="ngModel"
+                 required>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <small *ngIf="title.errors['required']" class="text-danger">
+              Please provide note title.
+            </small>
+          </div>
+        </div>
+        <p>
+          *replace this p tag with fields following:*<br>
+          noteFile, fileFormatAttr, fileName
+        </p>
+        <div>
+          <label for="txtNote" class="form-label">Note</label>
+          <input type="textarea" id="txtNote" name="txtNote" class="form-control"
+                 [(ngModel)]="note.note" #Note="ngModel"
+                 required>
+          <div *ngIf="Note.invalid && (Note.dirty || Note.touched)">
+            <small *ngIf="Note.errors['required']" class="text-danger">
+              Please provide note.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtAssignmentId" class="form-label">Assignment #</label>
+          <input type="textarea" id="txtAssignmentId" name="txtAssignmentId" class="form-control"
+                 [(ngModel)]="note.assignmentId" #assignmentId="ngModel"
+                 required>
+          <div *ngIf="assignmentId.invalid && (assignmentId.dirty || assignmentId.touched)">
+            <small *ngIf="assignmentId.errors['required']" class="text-danger">
+              Please select assignment that you want to write note.
+            </small>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <button class="btn btn-primary" id="btnSave" name="btnSave"
+                  [disabled]="myForm.invalid"
+                  (click)="btnSave_click()">Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+
+    </div>
+  </div>
+</div>
