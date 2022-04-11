@@ -16,6 +16,6 @@ export class AddCoursePageComponent implements OnInit {
   }
 
   btnSave_click(){
-    
+
   }
 }

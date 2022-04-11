@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Mark} from "../models/marks.model";
 
 @Component({
   selector: 'app-add-mark-page',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-mark-page.component.css']
 })
 export class AddMarkPageComponent implements OnInit {
+  formTitle = 'Add Mark';
 
+  mark:Mark = new Mark(0,0,0);
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  btnSave_click(){
+
+  }
 }

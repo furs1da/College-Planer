@@ -1,1 +1,57 @@
-<p>add-mark-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+        <div>
+          <label for="txtAssignmentId" class="form-label">Assignment #</label>
+          <input type="text" id="txtAssignmentId" name="txtAssignmentId" class="form-control"
+                 [(ngModel)]="mark.assignmentId" #assignmentId="ngModel"
+                 required>
+          <div *ngIf="assignmentId.invalid && (assignmentId.dirty || assignmentId.touched)">
+            <small *ngIf="assignmentId.errors['required']" class="text-danger">
+              Please select assignment that you want to add mark.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtWeight" class="form-label">Weight(%)</label>
+          <input type="text" id="txtWeight" name="txtWeight" class="form-control"
+                 [(ngModel)]="mark.weight" #weight="ngModel"
+                 required>
+          <div *ngIf="weight.invalid && (weight.dirty || weight.touched)">
+            <small *ngIf="weight.errors['required']" class="text-danger">
+              Please provide weight percentage of this assignment.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtGrade" class="form-label">Grade(%)</label>
+          <input type="text" id="txtGrade" name="txtGrade" class="form-control"
+                 [(ngModel)]="mark.grade" #grade="ngModel"
+                 required>
+          <div *ngIf="grade.invalid && (grade.dirty || grade.touched)">
+            <small *ngIf="grade.errors['required']" class="text-danger">
+              Please provide grade of this assignment.
+            </small>
+          </div>
+        </div>
+
+
+        <div class="mt-5">
+          <button class="btn btn-primary" id="btnSave" name="btnSave"
+                  [disabled]="myForm.invalid"
+                  (click)="btnSave_click()">Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+
+    </div>
+  </div>
+</div>
