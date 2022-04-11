@@ -6,5 +6,7 @@ export class Mark {
 
   constructor(assignmentId: number,
               weight: number) {
+    this.assignmentId = assignmentId;
+    this.weight = weight ;
   }
 }
