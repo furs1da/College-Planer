@@ -217,6 +217,54 @@ export class DatabaseService {
   }
 
 
+  public updateMark(mark: Mark, callback) {
+    function txFunction(tx: any): void {
+      let sql = "UPDATE marks SET assignmentId=?, weight=? WHERE id=?;";
+      let options = [mark.assignmentId, mark.weight, mark.id];
+      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDatabase().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Success: update transaction successful");
+    });
+  }
+
+  public updateCourse(course: Course, callback) {
+    function txFunction(tx: any): void {
+      let sql = "UPDATE courses SET courseName=?, courseCode=? WHERE id=?;";
+      let options = [course.courseName, course.courseCode, course.id];
+      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDatabase().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Success: update transaction successful");
+    });
+  }
+
+  public updateAssignment(assignment: Assignment, callback) {
+    function txFunction(tx: any): void {
+      let sql = "UPDATE assignments SET courseId=?, assignmentNumber=?, title=?, dueDate=?, assignmentFile=?, fileFormatAttr=?, fileName=?, description=?, weight=?, isFinished=?  WHERE id=?;";
+      let options = [assignment.courseId, assignment.assignmentNumber, assignment.title, assignment.dueDate, assignment.assignmentFile, assignment.fileFormatAttr, assignment.fileName, assignment.description, assignment.weight, assignment.isFinished, assignment.id];
+      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDatabase().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Success: update transaction successful");
+    });
+  }
+
+  public updateNote(noteItem: Note, callback) {
+    function txFunction(tx: any): void {
+      let sql = "UPDATE notes SET title=?, note=?, noteFile=?, fileFormatAttr=?, fileName=?, assignmentId=? WHERE id=?;";
+      let options = [noteItem.title, noteItem.note, noteItem.noteFile, noteItem.fileFormatAttr, noteItem.fileName, noteItem.assignmentId, noteItem.id];
+      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDatabase().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Success: update transaction successful");
+    });
+  }
+
 
 
 }
