@@ -1,1 +1,106 @@
-<p>add-assignment-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+        <div>
+          <label for="cmbCourseId" class="form-label">Course</label>
+          <input type="text" id="cmbCourseId" name="txtName" class="form-control"
+          [(ngModel)]="assignment.courseId" #courseId="ngModel"
+          required>
+          <div *ngIf="courseId.invalid && (courseId.dirty || courseId.touched)">
+            <small *ngIf="courseId.errors['required']" class="text-danger">
+              Please select the course.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtAssignmentNumber" class="form-label">Assignment Number</label>
+          <input type="text" id="txtAssignmentNumber" name="txtAssignmentNumber" class="form-control"
+                 [(ngModel)]="assignment.assignmentNumber" #assignmentNumber="ngModel"
+                 required>
+          <div *ngIf="assignmentNumber.invalid && (assignmentNumber.dirty || assignmentNumber.touched)">
+            <small *ngIf="assignmentNumber.errors['required']" class="text-danger">
+              Please enter the assignment number.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtTitle" class="form-label">Title</label>
+          <input type="text" id="txtTitle" name="txtTitle" class="form-control"
+                 [(ngModel)]="assignment.title" #title="ngModel"
+                 required>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <small *ngIf="title.errors['required']" class="text-danger">
+              Please enter the title.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtDueDate" class="form-label">Due Date</label>
+          <input type="date" id="txtDueDate" name="txtDueDate" class="form-control"
+                 [(ngModel)]="assignment.dueDate" #dueDate="ngModel"
+                 required>
+          <div *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)">
+            <small *ngIf="dueDate.errors['required']" class="text-danger">
+              Please provide a due date.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtDescription" class="form-label">Description</label>
+          <input type="textarea" id="txtDescription" name="txtDescription" class="form-control"
+                 [(ngModel)]="assignment.description" #description="ngModel"
+                 required>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)">
+            <small *ngIf="description.errors['required']" class="text-danger">
+              Please enter the brief description of assignment.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtWeight" class="form-label">Weight(%)</label>
+          <input type="text" id="txtWeight" name="txtWeight" class="form-control"
+                 [(ngModel)]="assignment.weight" #weight="ngModel"
+                 required>
+          <div *ngIf="weight.invalid && (weight.dirty || weight.touched)">
+            <small *ngIf="weight.errors['required']" class="text-danger">
+              Please enter weight of assignment.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="isFinished" class="form-label">Is Finished</label>
+          <input type="text" id="isFinished" name="isFinished" class="form-control"
+                 [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
+                 required>
+          <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
+            <small *ngIf="isFinished.errors['required']" class="text-danger">
+              Please enter status.
+            </small>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <button class="btn btn-primary" id="btnSave" name="btnSave"
+                  [disabled]="myForm.invalid"
+
+                  (click)="btnSave_click()">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+
+    </div>
+  </div>
+</div>
