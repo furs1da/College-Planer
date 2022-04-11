@@ -371,4 +371,125 @@ export class DatabaseService {
     });
   }
 
+
+  public selectAllCourses(): Promise<any> {
+    let options = [];
+    let courses: Course[] = [];
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let c = new Course(row['courseName'], row['courseCode']);
+              c.id = row['id'];
+              courses.push(c);
+            }
+            resolve(courses);
+          } else {
+            reject("No courses found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
+  public selectAllMarks(): Promise<any> {
+    let options = [];
+    let marks: Mark[] = [];
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let m = new Mark(row['assignmentId'], row['weight']);
+              m.id = row['id'];
+              marks.push(m);
+            }
+            resolve(marks);
+          } else {
+            reject("No marks found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
+  public selectAllNotes(): Promise<any> {
+    let options = [];
+    let notes: Note[] = [];
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let n = new Note(row['title'], row['note'], row['noteFile'], row['fileFormatAttr'], row['fileName'], row['assignmentId']);
+              n.id = row['id'];
+              notes.push(n);
+            }
+            resolve(notes);
+          } else {
+            reject("No notes found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
+  public selectAllAssignments(): Promise<any> {
+    let options = [];
+    let assignments: Assignment[] = [];
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let a = new Assignment(row['courseId'], row['assignmentNumber'], row['title'], row['dueDate'], row['assignmentFile'], row['fileFormatAttr'], row['fileName'], row['description'], row['weight'], row['isFinished']);
+              a.id = row['id'];
+              assignments.push(a);
+            }
+            resolve(assignments);
+          } else {
+            reject("No assignments found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
 }
