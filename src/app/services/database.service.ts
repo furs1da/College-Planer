@@ -266,5 +266,57 @@ export class DatabaseService {
   }
 
 
+  public selectMark(id: number): Promise<any> {
+    let options = [id];
+    let mark: Mark = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM marks WHERE id=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let mark = new Mark(row['assignmentId'], row['weight']);
+            mark.id = row['id'];
+            resolve(mark);
+          } else {
+            reject("Specific mark not found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: select transaction successful");
+        })
+    });
+  }
+
+
+  public selectCourse(id: number): Promise<any> {
+    let options = [id];
+    let course: Course = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses WHERE id=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let course = new Mark(row['courseName'], row['courseCode']);
+            course.id = row['id'];
+            resolve(course);
+          } else {
+            reject("Specific course not found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: select transaction successful");
+        })
+    });
+  }
 
 }
