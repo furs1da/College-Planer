@@ -303,11 +303,63 @@ export class DatabaseService {
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             let row = results.rows[0];
-            let course = new Mark(row['courseName'], row['courseCode']);
+            let course = new Course(row['courseName'], row['courseCode']);
             course.id = row['id'];
             resolve(course);
           } else {
             reject("Specific course not found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: select transaction successful");
+        })
+    });
+  }
+
+  public selectNote(id: number): Promise<any> {
+    let options = [id];
+    let noteItem: Note = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM notes WHERE id=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let noteItem = new Note(row['title'], row['note'], row['noteFile'], row['fileFormatAttr'], row['fileName'], row['assignmentId']);
+            noteItem.id = row['id'];
+            resolve(noteItem);
+          } else {
+            reject("Specific note not found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: select transaction successful");
+        })
+    });
+  }
+
+  public selectAssignment(id: number): Promise<any> {
+    let options = [id];
+    let assignment: Assignment = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM courses WHERE id=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let assignment = new Assignment(row['courseId'], row['assignmentNumber'], row['title'], row['dueDate'], row['assignmentFile'], row['fileFormatAttr'], row['fileName'], row['description'], row['weight'], row['isFinished']);
+            assignment.id = row['id'];
+            resolve(assignment);
+          } else {
+            reject("Specific assignment not found");
           }
         }, DatabaseService.errorHandler);
       }
