@@ -10,7 +10,7 @@ export class AddMarkPageComponent implements OnInit {
   formTitle = 'Add Mark';
 
   mark:Mark = new Mark();
-  constructor() { }
+
 
   ngOnInit(): void {
   }

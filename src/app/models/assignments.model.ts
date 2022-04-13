@@ -13,10 +13,10 @@ export class Assignment {
 
 
 
-  constructor(courseId: number,
-              assignmentNumber: number,
-              title: string,
-              dueDate: string,
+  constructor(courseId?: number,
+              assignmentNumber?: number,
+              title?: string,
+              dueDate?: string,
               assignmentFile?: string,
               fileFormatAttr?: string,
               fileName?: string,

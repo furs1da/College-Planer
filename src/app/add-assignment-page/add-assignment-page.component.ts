@@ -10,7 +10,7 @@ import {Assignment} from "../models/assignments.model";
 export class AddAssignmentPageComponent implements OnInit {
   formTitle = 'Add Assignment';
   //courseId, assignmentNumber, title, dueDate, assignmentFile, fileFormatAttr, fileName, description, weight, isFinished
-  assignment:Assignment = new Assignment(-1, 0, "", "", "", "", "", "",0,-1);
+  assignment:Assignment = new Assignment();
 
   constructor() { }
 

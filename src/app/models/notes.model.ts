@@ -8,8 +8,8 @@ export class Note {
   assignmentId: number = -1;
 
 
-  constructor(title: string,
-              note: string,
+  constructor(title?: string,
+              note?: string,
               noteFile?: string,
               fileFormatAttr?: string,
               fileName?: string,  //pls check and delete

@@ -8,7 +8,7 @@ import {Note} from "../models/notes.model";
 })
 export class AddNotePageComponent implements OnInit {
   formTitle = 'Add Note';
-  note:Note = new Note("asd", "", "", "", "", 0);
+  note:Note = new Note();
   constructor() { }
 
   ngOnInit(): void {

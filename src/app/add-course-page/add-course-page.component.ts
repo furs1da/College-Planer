@@ -9,7 +9,7 @@ import {Course} from "../models/courses.model";
 export class AddCoursePageComponent implements OnInit {
   formTitle = 'Add Course';
 
-  course:Course = new Course("","");
+  course:Course = new Course();
   constructor() { }
 
   ngOnInit(): void {
