@@ -9,7 +9,7 @@ import {Mark} from "../models/marks.model";
 export class AddMarkPageComponent implements OnInit {
   formTitle = 'Add Mark';
 
-  mark:Mark = new Mark(0,0,0);
+  mark:Mark = new Mark();
   constructor() { }
 
   ngOnInit(): void {

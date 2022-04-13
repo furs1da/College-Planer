@@ -4,10 +4,10 @@ export class Mark {
   weight: number = 0;
   grade: number = 0;
 
-
-  constructor(assignmentId: number,
-              weight: number,
-              grade: number) {
+  constructor();
+  constructor(assignmentId?: number,
+              weight?: number,
+              grade?: number) {
     this.assignmentId = assignmentId;
     this.weight = weight ;
     this.grade = grade;
