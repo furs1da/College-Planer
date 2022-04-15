@@ -19,6 +19,7 @@ import { AddMarkPageComponent } from './add-mark-page/add-mark-page.component';
 import { ModifyMarkPageComponent } from './modify-mark-page/modify-mark-page.component';
 import { AboutpageComponent } from './aboutpage/aboutpage.component';
 import {FormsModule} from "@angular/forms";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {FormsModule} from "@angular/forms";
     ListMarkPageComponent,
     AddMarkPageComponent,
     ModifyMarkPageComponent,
-    AboutpageComponent
+    AboutpageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
