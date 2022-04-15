@@ -1,1 +1,26 @@
-<p>list-assignment-page works!</p>
+<div class="m-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>List of Assignment</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li *ngFor="let assignment of assignments" class="list-group-item">
+          <button type="button" id="btnModify" name="btnModify"
+                  class="btn btn-primary btn-sm me-4"
+                  (click)="btnModify_click(assignment)">Modify
+          </button>
+
+          <button type="button" id="btnDelete" name="btnDelete"
+                  class="btn btn-danger btn-sm me-4"
+                  (click)="btnDelete_click(assignment)">Delete
+          </button>
+          {{assignment.assignmentNumber}}
+          {{assignment.title}}
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@ export class ListCoursePageComponent implements OnInit {
   }
 
   btnModify_click(course: Course){
-    this.router.navigate(['modify/' + course.id]);
+    this.router.navigate(['modifyCourse/' + course.id]);
   }
 
   btnDelete_click(course: Course){
