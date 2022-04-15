@@ -19,5 +19,4 @@ export class AddAssignmentPageComponent implements OnInit {
 
   btnSave_click(){
   }
-
 }

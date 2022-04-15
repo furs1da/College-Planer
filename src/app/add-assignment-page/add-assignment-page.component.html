@@ -15,6 +15,7 @@
               Please select the course.
             </small>
           </div>
+
         </div>
 
         <div>
@@ -60,9 +61,9 @@
 
         <div>
           <label for="txtDescription" class="form-label">Description</label>
-          <input type="textarea" id="txtDescription" name="txtDescription" class="form-control"
+          <textarea  type="textarea" id="txtDescription" name="txtDescription" class="md-textarea form-control"
                  [(ngModel)]="assignment.description" #description="ngModel"
-                 required>
+                 required></textarea>
           <div *ngIf="description.invalid && (description.dirty || description.touched)">
             <small *ngIf="description.errors['required']" class="text-danger">
               Please enter the brief description of assignment.
@@ -84,9 +85,12 @@
 
         <div>
           <label for="isFinished" class="form-label">Is Finished</label>
-          <input type="text" id="isFinished" name="isFinished" class="form-control"
-                 [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
-                 required>
+          <select name="isFinished" id="isFinished" class="form-control"
+                  [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
+                  required>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
           <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
             <small *ngIf="isFinished.errors['required']" class="text-danger">
               Please enter status.
