@@ -3,6 +3,7 @@ export class Course{
   courseName: string = "";
   courseCode: string = "";
 
+  constructor();
   constructor(courseName? : string, courseCode? : string) {
     this.courseName = courseName;
     this.courseCode = courseCode;

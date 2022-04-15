@@ -12,7 +12,7 @@ export class Assignment {
   public isFinished: number = -1;  //pls check and delete
 
 
-
+  constructor();
   constructor(courseId?: number,
               assignmentNumber?: number,
               title?: string,

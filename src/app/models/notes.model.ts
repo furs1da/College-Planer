@@ -7,7 +7,7 @@ export class Note {
   fileName: string = "";
   assignmentId: number = -1;
 
-
+  constructor();
   constructor(title?: string,
               note?: string,
               noteFile?: string,
