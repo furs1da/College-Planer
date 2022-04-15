@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Course} from "../models/courses.model";
+import {DatabaseService} from "../services/database.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-course-page',
@@ -6,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-course-page.component.css']
 })
 export class ListCoursePageComponent implements OnInit {
-
-  constructor() { }
+  courses: Course[] = []
+  constructor(private database: DatabaseService,
+              private router: Router) {}
 
   ngOnInit(): void {
+    this.database.selectAllCourses().then((data)=>{
+      this.courses = data;
+    }).catch((error)=>{
+        console.error(error)
+    });
+  }
+
+  btnModify_click(course: Course){
+    this.router.navigate(['modify/' + course.id]);
+  }
+
+  btnDelete_click(course: Course){
+    this.database.deleteCourse(course, ()=>{
+      console.log("Course deleted successfully.");
+      alert("Course deleted successfully.");
+    });
+
+    this.ngOnInit();
   }
 
 }
