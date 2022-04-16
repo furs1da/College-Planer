@@ -20,6 +20,7 @@ import { ModifyMarkPageComponent } from './modify-mark-page/modify-mark-page.com
 import { AboutpageComponent } from './aboutpage/aboutpage.component';
 import {FormsModule} from "@angular/forms";
 import { FooterComponent } from './footer/footer.component';
+import { SettingpageComponent } from './settingpage/settingpage.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FooterComponent } from './footer/footer.component';
     AddMarkPageComponent,
     ModifyMarkPageComponent,
     AboutpageComponent,
-    FooterComponent
+    FooterComponent,
+    SettingpageComponent
   ],
   imports: [
     BrowserModule,

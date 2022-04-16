@@ -14,6 +14,7 @@ import {ModifyAssignmentPageComponent} from "./modify-assignment-page/modify-ass
 import {ModifyMarkPageComponent} from "./modify-mark-page/modify-mark-page.component";
 import {ModifyNotePageComponent} from "./modify-note-page/modify-note-page.component";
 import {AboutpageComponent} from "./aboutpage/aboutpage.component";
+import {SettingpageComponent} from "./settingpage/settingpage.component";
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: "modifyAssignment/:id", component: ModifyAssignmentPageComponent},
   {path: "modifyMark/:id", component: ModifyMarkPageComponent},
   {path: "modifyNote/:id", component: ModifyNotePageComponent},
-  {path: "about", component: AboutpageComponent}
+  {path: "about", component: AboutpageComponent},
+  {path: "setting", component: SettingpageComponent}
 
 ];
 
