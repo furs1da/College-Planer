@@ -207,9 +207,12 @@ export class DatabaseService {
 
   public deleteCourse(course: Course, callback) {
     function txFunction(tx: any): void {
-      let sql = "DELETE FROM courses WHERE id=?;";
-      let options = [course.id];
-      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+      let result = confirm("Do you really want to clear Database?");
+      if (result) {
+        let sql = "DELETE FROM courses WHERE id=?;";
+        let options = [course.id];
+        tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+      }
     }
 
     this.getDatabase().transaction(txFunction, DatabaseService.errorHandler, () => {

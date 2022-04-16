@@ -1,21 +1,26 @@
 <div class="m-4">
   <div class="card">
-    <div class="card-header">
+    <div class="card-header bg-primary text-white">
       <h2>List of Courses</h2>
     </div>
     <div class="card-body">
       <ul class="list-group">
         <li *ngFor="let course of courses" class="list-group-item">
-          <button type="button" id="btnModify" name="btnModify"
-                  class="btn btn-primary btn-sm me-4"
-                  (click)="btnModify_click(course)">Modify
-          </button>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Course Code:  {{course.courseName}}</h5>
+              <p class="card-text">Course Name: {{course.courseName}}</p>
+              <button type="button" id="btnModify" name="btnModify"
+                      class="btn btn-primary btn-sm me-4"
+                      (click)="btnModify_click(course)">Modify
+              </button>
 
-          <button type="button" id="btnDelete" name="btnDelete"
-                  class="btn btn-danger btn-sm me-4"
-                  (click)="btnDelete_click(course)">Delete
-          </button>
-          {{course.courseName}}
+              <button type="button" id="btnDelete" name="btnDelete"
+                      class="btn btn-danger btn-sm me-4"
+                      (click)="btnDelete_click(course)">Delete
+              </button>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
