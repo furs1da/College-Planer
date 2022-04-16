@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Course} from "../models/courses.model";
 import {DatabaseService} from "../services/database.service";
 import {Router} from "@angular/router";
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class ListCoursePageComponent implements OnInit {
   courses: Course[] = []
   constructor(private database: DatabaseService,
-              private router: Router) {
+              private router: Router, private ngZone: NgZone) {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
@@ -34,7 +34,9 @@ export class ListCoursePageComponent implements OnInit {
     this.database.deleteCourse(course, ()=>{
       console.log("Course deleted successfully.");
       alert("Course deleted successfully.");
-      this.router.navigate(['listCourse/']);
+      this.ngZone.run(() => {
+        this.router.navigate(['listCourse/']);
+      });
     });
   }
 

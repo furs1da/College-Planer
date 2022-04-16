@@ -17,7 +17,8 @@ export class AddAssignmentPageComponent implements OnInit {
   assignment:Assignment = new Assignment();
 
   constructor(private database: DatabaseService,
-              private router: Router) {
+              private router: Router,
+             ) {
 
   }
 
@@ -30,6 +31,8 @@ export class AddAssignmentPageComponent implements OnInit {
   }
 
   btnSave_click(){
+    this.assignment.weight = +this.assignment.weight.toFixed(2);
+    console.log(this.assignment)
   }
 
   onCourseChange(event){
