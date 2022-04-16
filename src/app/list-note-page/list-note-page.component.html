@@ -5,17 +5,27 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-        <li *ngFor="let note of notes" class="list-group-item">
-          <button type="button" id="btnModify" name="btnModify"
-                  class="btn btn-primary btn-sm me-4"
-                  (click)="btnModify_click(note)">Modify
-          </button>
+        <li *ngFor="let note of notes; index as i" class="list-group-item">
 
-          <button type="button" id="btnDelete" name="btnDelete"
-                  class="btn btn-danger btn-sm me-4"
-                  (click)="btnDelete_click(note)">Delete
-          </button>
-          {{note.id}}
+          <div class="card-body">
+            <h4  *ngIf="assignments.length != 0" class="card-title">Assignment Title:  {{assignments[i].title}}</h4>
+            <p *ngIf="assignments.length != 0" class="card-text">Assignment Description:  {{assignments[i].description}}</p>
+            <p *ngIf="courses.length != 0" class="card-text"> Course:  {{courses[i].courseCode}}</p>
+            <h5 class="card-text">Note Title:  {{note.title}}</h5>
+            <p class="card-text">Note Content: {{note.note}}</p>
+
+            <button type="button" id="btnModify" name="btnModify"
+                    class="btn btn-primary btn-sm me-4"
+                    (click)="btnModify_click(note)">Modify
+            </button>
+
+            <button type="button" id="btnDelete" name="btnDelete"
+                    class="btn btn-danger btn-sm me-4"
+                    (click)="btnDelete_click(note)">Delete
+            </button>
+          </div>
+
+
         </li>
       </ul>
     </div>
