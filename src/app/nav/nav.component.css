@@ -1,3 +1,9 @@
-.dropdown:hover .dropdown-menu {
-  background: aquamarine;
+nav {
+ width: 100%;
+}
+.dropdown-menu .dropdown-item:hover{
+  background: darkblue;
+}
+span .navbar-toggler-icon {
+  color: white;
 }
