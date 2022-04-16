@@ -5,11 +5,9 @@
     </div>
     <div class="card-body">
       <ul class="list-group">
-        <li *ngFor="let mark of marks" class="list-group-item">
+        <li *ngFor="let mark of marks; index as i" class="list-group-item">
           <div class="card-body">
-            <h4 class="card-title">Title:  {{getAssignmentInfo(mark.id).title}}</h4>
-            <h5 class="card-title">Description:  {{getAssignmentInfo(mark.id).description}}</h5>
-            <h5 class="card-title"> Course:  {{getCourseInfo(getAssignmentInfo(mark.id).courseId).courseCode}}</h5>
+
             <p class="card-title">Grade:  {{mark.grade}}</p>
             <p class="card-text">Weight: {{mark.weight}}</p>
 

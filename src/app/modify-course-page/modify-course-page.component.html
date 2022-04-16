@@ -18,8 +18,8 @@
         </div>
 
         <div>
-          <label for="txtcourseCode" class="form-label">Course Code</label>
-          <input type="text" id="txtcourseCode" name="txtcourseCode" class="form-control"
+          <label for="txtCourseCode" class="form-label">Course Code</label>
+          <input type="text" id="txtCourseCode" name="txtCourseCode" class="form-control"
                  [(ngModel)]="course.courseCode" #courseCode="ngModel"
                  required>
           <div *ngIf="courseCode.invalid && (courseCode.dirty || courseCode.touched)">
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="mt-5">
+        <div class="mt-3">
           <button class="btn btn-primary" id="btnSave" name="btnSave"
                   [disabled]="myForm.invalid"
                   (click)="btnUpdate_click()">

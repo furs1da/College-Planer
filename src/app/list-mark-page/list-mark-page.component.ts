@@ -13,38 +13,49 @@ import {Router} from "@angular/router";
 })
 export class ListMarkPageComponent implements OnInit {
   marks: Mark[] = []
-  assignment: Assignment = new Assignment();
-  course: Course = new Course();
+  assignments: Assignment[] = [];
+  courses: Course[] = [];
+
   constructor(private database: DatabaseService,
               private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.database.selectAllMarks().then((data)=>{
       this.marks = data;
+
+
+    }).then(()=> {
+
+      for(let i=0; i<this.marks.length; i++){
+        this.database.selectAssignment(this.marks[i].assignmentId).then((data)=>{
+          this.assignments.push(data);
+        }).catch((error)=>{
+          console.error(error)
+        });
+      }
+
+      console.log(this.assignments);
+    }).then(()=>{
+      console.log(this.assignments);
+      for(let j=0; j<this.assignments.length; j++){
+        this.database.selectCourse(this.assignments[j].courseId).then((data)=>{
+          console.log(data);
+          this.courses.push(data);
+        }).catch((error)=>{
+          console.error(error)
+        });
+      }
+
     }).catch((error)=>{
       console.error(error)
     });
+
+
+
+
   }
 
-  getAssignmentInfo(id:number) : Assignment {
-    this.database.selectAssignment(id).then((data)=>{
-      this.assignment = data;
-    }).catch((error)=>{
-      console.error(error)
-    });
 
-    return this.assignment;
-  }
-
-  getCourseInfo(id:number) : Course {
-    this.database.selectCourse(id).then((data)=>{
-      this.course = data;
-    }).catch((error)=>{
-      console.error(error)
-    });
-
-    return this.course;
-  }
 
   btnModify_click(mark: Mark){
     this.router.navigate(['modifyMark/' + mark.id]);
