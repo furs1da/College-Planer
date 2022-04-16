@@ -6,7 +6,7 @@
     <div class="card-body">
       <ul class="list-group">
         <li *ngFor="let course of courses" class="list-group-item">
-          <div class="card">
+
             <div class="card-body">
               <h5 class="card-title">Course Code:  {{course.courseName}}</h5>
               <p class="card-text">Course Name: {{course.courseName}}</p>
@@ -20,7 +20,7 @@
                       (click)="btnDelete_click(course)">Delete
               </button>
             </div>
-          </div>
+
         </li>
       </ul>
     </div>
