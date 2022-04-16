@@ -94,7 +94,6 @@ export class DatabaseService {
       sql = " CREATE TABLE IF NOT EXISTS marks(" +
         " id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
         " assignmentId INTEGER NOT NULL," +
-        " weight DOUBLE NOT NULL," +
         " grade DOUBLE NOT NULL," +
         " FOREIGN KEY (assignmentId) REFERENCES assignments (id));";
 
@@ -194,8 +193,8 @@ export class DatabaseService {
 
   public insertMarks(mark: Mark, callback) {
     function txFunction(tx: any): void {
-      let sql = "INSERT INTO marks(assignmentId, weight, grade) VALUES(?,?,?);";
-      let options = [mark.assignmentId, mark.weight, mark.grade];
+      let sql = "INSERT INTO marks(assignmentId, grade) VALUES(?,?);";
+      let options = [mark.assignmentId, mark.grade];
       tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
     }
 
@@ -257,8 +256,8 @@ export class DatabaseService {
 
   public updateMark(mark: Mark, callback) {
     function txFunction(tx: any): void {
-      let sql = "UPDATE marks SET assignmentId=?, weight=?, grade=? WHERE id=?;";
-      let options = [mark.assignmentId, mark.weight, mark.id];
+      let sql = "UPDATE marks SET assignmentId=?, grade=? WHERE id=?;";
+      let options = [mark.assignmentId, mark.id];
       tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
     }
 
@@ -314,7 +313,7 @@ export class DatabaseService {
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             let row = results.rows[0];
-            let mark = new Mark(row['assignmentId'], row['weight'], row['grade']);
+            let mark = new Mark(row['assignmentId'], row['grade']);
             mark.id = row['id'];
             resolve(mark);
           } else {
@@ -340,7 +339,7 @@ export class DatabaseService {
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             let row = results.rows[0];
-            let mark = new Mark(row['assignmentId'], row['weight'], row['grade']);
+            let mark = new Mark(row['assignmentId'], row['grade']);
             mark.id = row['id'];
             resolve(mark);
           } else {
@@ -476,7 +475,7 @@ export class DatabaseService {
           if (results.rows.length > 0) {
             for (let i = 0; i < results.rows.length; i++) {
               let row = results.rows[i];
-              let m = new Mark(row['assignmentId'], row['weight'], row['grade']);
+              let m = new Mark(row['assignmentId'], row['grade']);
               m.id = row['id'];
               marks.push(m);
             }

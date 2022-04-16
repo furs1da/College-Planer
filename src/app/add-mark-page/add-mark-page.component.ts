@@ -17,6 +17,7 @@ export class AddMarkPageComponent implements OnInit {
   assignments: Assignment[] = []
   alreadyMarked :boolean = false;
   selectAssignmentDisabled:boolean = true;
+  weightMark:number = 0;
 
   mark:Mark = new Mark();
 
@@ -37,7 +38,7 @@ export class AddMarkPageComponent implements OnInit {
     this.courseId = event;
     this.selectAssignmentDisabled = false;
     this.mark.assignmentId = undefined;
-    this.mark.weight = undefined;
+    this.weightMark = 0;
     this.database.selectAllAssignmentsByCourse(this.courseId).then((data)=>{
       this.assignments = data;
     }).catch((error)=>{
@@ -48,7 +49,7 @@ export class AddMarkPageComponent implements OnInit {
   onAssignmentChange(event){
     this.mark.assignmentId = event;
     this.database.selectAssignment(this.mark.assignmentId).then((data)=>{
-      this.mark.weight = data.weight;
+      this.weightMark = data.weight;
     }).catch((error)=>{
       console.error(error)
     });
