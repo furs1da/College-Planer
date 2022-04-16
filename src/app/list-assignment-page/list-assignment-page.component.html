@@ -12,11 +12,12 @@
             <p class="card-text">Assignment #: {{assignment.assignmentNumber}}</p>
             <p class="card-text">Due Date: {{assignment.dueDate}}</p>
             <p class="card-text">Description: {{assignment.description}}</p>
-            <p class="card-text">Weight: {{assignment.assignmentNumber}}%</p>
+            <p class="card-text">Weight: {{assignment.weight}}%</p>
 
-
-            <p class="card-text">Is Finished? {{assignment.isFinished}}</p>
-
+            <div [ngSwitch]="assignment.isFinished">
+              <p *ngSwitchCase="'true'">Is Finished? YES</p>
+              <p *ngSwitchCase="'false'">Is Finished? NO</p>
+            </div>
 
             <button type="button" id="btnModify" name="btnModify"
                     class="btn btn-primary btn-sm me-4"
