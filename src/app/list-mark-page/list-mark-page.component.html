@@ -1,5 +1,5 @@
 <div class="m-4">
-  <div class="card">
+  <div class="card mb-5">
     <div class="card-header">
       <h2>List of Marks</h2>
     </div>
@@ -7,8 +7,10 @@
       <ul class="list-group">
         <li *ngFor="let mark of marks; index as i" class="list-group-item">
           <div class="card-body">
-
-            <p class="card-title">Grade:  {{mark.grade}}</p>
+            <h4 class="card-title">Title:  {{assignments[i].title}}</h4>
+            <p class="card-text">Description:  {{assignments[i].description}}</p>
+            <p class="card-text"> Course:  {{courses[i].courseCode}}</p>
+            <p class="card-text">Grade:  {{mark.grade}}</p>
             <p class="card-text">Weight: {{mark.weight}}</p>
 
             <button type="button" id="btnModify" name="btnModify"

@@ -29,23 +29,17 @@ export class ListMarkPageComponent implements OnInit {
       for(let i=0; i<this.marks.length; i++){
         this.database.selectAssignment(this.marks[i].assignmentId).then((data)=>{
           this.assignments.push(data);
+          this.database.selectCourse(data.courseId).then((data)=>{
+            this.courses.push(data);
+          }).catch((error)=>{
+            console.error(error)
+          });
         }).catch((error)=>{
           console.error(error)
         });
       }
 
       console.log(this.assignments);
-    }).then(()=>{
-      console.log(this.assignments);
-      for(let j=0; j<this.assignments.length; j++){
-        this.database.selectCourse(this.assignments[j].courseId).then((data)=>{
-          console.log(data);
-          this.courses.push(data);
-        }).catch((error)=>{
-          console.error(error)
-        });
-      }
-
     }).catch((error)=>{
       console.error(error)
     });
