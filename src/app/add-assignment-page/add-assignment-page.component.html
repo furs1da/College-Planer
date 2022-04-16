@@ -7,16 +7,16 @@
       <form #myForm="ngForm">
         <div>
           <label for="cmbCourseId" class="form-label">Course</label>
-          <input type="text" id="cmbCourseId" name="txtName" class="form-control"
-          [(ngModel)]="assignment.courseId" #courseId="ngModel"
-          required>
-          <div *ngIf="courseId.invalid && (courseId.dirty || courseId.touched)">
-            <small *ngIf="courseId.errors['required']" class="text-danger">
+          <select [(ngModel)]="assignment.courseId" (ngModelChange)="onCourseChange($event)" #txtCourse="ngModel" id="cmbCourseId" name="txtCourse" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of courses">{{i.courseName}}</option>
+          </select>
+          <div *ngIf="txtCourse.invalid && (txtCourse.dirty || txtCourse.touched)">
+            <small *ngIf="txtCourse.errors['required']" class="text-danger">
               Please select the course.
             </small>
           </div>
-
         </div>
+        
 
         <div>
           <label for="txtAssignmentNumber" class="form-label">Assignment Number</label>
