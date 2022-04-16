@@ -12,6 +12,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 
 export class AddAssignmentPageComponent implements OnInit {
+
   formTitle = 'Add Assignment';
   courses: Course[] = []
   //courseId, assignmentNumber, title, dueDate, assignmentFile, fileFormatAttr, fileName, description, weight, isFinished

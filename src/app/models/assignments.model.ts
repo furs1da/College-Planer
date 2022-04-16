@@ -1,15 +1,15 @@
 export class Assignment {
   id: number = -1;
-  public courseId: number = -1;
-  public assignmentNumber: number = 0;
-  public title: string = "";
-  public dueDate: string = "";
-  public assignmentFile: string = "";  //pls check and delete
-  public fileFormatAttr: string = "";  //pls check and delete
-  public fileName: string = "";
-  public description: string = "";
-  public weight: number = 0; //pls check and delete
-  public isFinished: boolean = false;  //pls check and delete
+  courseId: number = -1;
+  assignmentNumber: number = 0;
+  title: string = "";
+  dueDate: string = "";
+  assignmentFile: string = "";  //pls check and delete
+  fileFormatAttr: string = "";  //pls check and delete
+  fileName: string = "";
+  description: string = "";
+  weight: number = 0; //pls check and delete
+  isFinished: boolean = false;  //pls check and delete
 
 
 
@@ -33,5 +33,8 @@ export class Assignment {
     this.description = description;
     this.weight = weight;
     this.isFinished = isFinished;
+  }
+  getCourseId(){
+    return this.courseId;
   }
 }

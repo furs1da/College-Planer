@@ -32,6 +32,7 @@ export class AddMarkPageComponent implements OnInit {
       console.error(error)
     });
   }
+
   onCourseChange(event){
     this.courseId = event;
     this.selectAssignmentDisabled = false;

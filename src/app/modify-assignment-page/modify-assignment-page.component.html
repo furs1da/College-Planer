@@ -1,1 +1,120 @@
-<p>modify-assignment-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+        <div>
+          <label for="cmbCourseId" class="form-label">Course</label>
+          <input type="number" id="cmbCourseId" name="cmbCourseId" class="form-control"
+                 [(ngModel)]="assignment.courseId" #courseId="ngModel"
+                 readonly>
+        </div>
+
+
+        <div>
+          <label for="txtAssignmentNumber" class="form-label">Assignment Number</label>
+          <input type="number" id="txtAssignmentNumber" name="txtAssignmentNumber" class="form-control"
+                 [(ngModel)]="assignment.assignmentNumber" #assignmentNumber="ngModel"
+                 required>
+          <div *ngIf="assignmentNumber.invalid && (assignmentNumber.dirty || assignmentNumber.touched)">
+            <small *ngIf="assignmentNumber.errors['required']" class="text-danger">
+              Please enter the assignment number.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtTitle" class="form-label">Title</label>
+          <input type="text" id="txtTitle" name="txtTitle" class="form-control"
+                 [(ngModel)]="assignment.title" #title="ngModel"
+                 required>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <small *ngIf="title.errors['required']" class="text-danger">
+              Please enter the title.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtDueDate" class="form-label">Due Date</label>
+          <input type="date" id="txtDueDate" name="txtDueDate" class="form-control"
+                 [(ngModel)]="assignment.dueDate" #dueDate="ngModel"
+                 required>
+          <div *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)">
+            <small *ngIf="dueDate.errors['required']" class="text-danger">
+              Please provide a due date.
+            </small>
+          </div>
+        </div>
+
+        <p>
+          *replace this p tag with fields following:*<br>
+          assignmentFile, fileFormatAttr, fileName
+        </p>
+
+        <div>
+          <label for="txtDescription" class="form-label">Description</label>
+          <textarea  type="textarea" id="txtDescription" name="txtDescription" class="md-textarea form-control"
+                     [(ngModel)]="assignment.description" #description="ngModel"
+                     required></textarea>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)">
+            <small *ngIf="description.errors['required']" class="text-danger">
+              Please enter the brief description of assignment.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtWeight" class="form-label">Weight(%)</label>
+          <input type="number" id="txtWeight" name="txtWeight" class="form-control" step ="0.01" min="1" max="100"
+                 [(ngModel)]="assignment.weight" #weight="ngModel"
+                 required>
+          <div *ngIf="weight.invalid && (weight.dirty || weight.touched)">
+            <small *ngIf="weight.errors" class="text-danger">
+              Please enter weight of assignment in range from 1 to 100.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="isFinished" class="form-label">Is Finished</label>
+          <select name="isFinished" id="isFinished" class="form-control"
+                  [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
+                  required>
+            <div *ngIf="assignment.isFinished == true">
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </div>
+            <div *ngIf="assignment.isFinished == false">
+              <option [ngValue]="true">Yes</option>
+              <option [ngValue]="false" selected>No</option>
+            </div>
+
+            <option [ngValue]="true">Yes</option>
+            <option [ngValue]="false" selected>No</option>
+          </select>
+          <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
+            <small *ngIf="isFinished.errors['required']" class="text-danger">
+              Please enter status.
+            </small>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <button class="btn btn-primary" id="btnSave" name="btnSave"
+                  [disabled]="myForm.invalid"
+                  (click)="btnUpdate_click()">
+            Update
+          </button>
+          <button class="btn btn-danger" id="btnCancel" name="btnCancel"
+                  (click)="btnCancel_click()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
