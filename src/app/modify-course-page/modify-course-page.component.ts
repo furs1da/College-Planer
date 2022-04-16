@@ -47,5 +47,4 @@ export class ModifyCoursePageComponent implements OnInit {
       this.router.navigate(['listCourse']);
     });
   }
-
 }
