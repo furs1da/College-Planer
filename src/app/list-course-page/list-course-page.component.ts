@@ -32,11 +32,14 @@ export class ListCoursePageComponent implements OnInit {
 
   btnDelete_click(course: Course){
     this.database.deleteCourse(course, ()=>{
+
       console.log("Course deleted successfully.");
       alert("Course deleted successfully.");
+
       this.ngZone.run(() => {
         this.router.navigate(['listCourse/']);
       });
+
     });
   }
 

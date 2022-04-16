@@ -58,9 +58,10 @@ export class AddMarkPageComponent implements OnInit {
     this.mark.grade = +this.mark.grade.toFixed(2);
 
     this.database.findMarkByAssignment(this.mark.assignmentId).then((data)=>{
-      if(data != undefined)
+      if(data != undefined) {
         this.alreadyMarked = true;
-      alert("This assignment already received the mark.");
+        alert("This assignment already received the mark.");
+      }
       if(!this.alreadyMarked) {
         this.database.insertMarks(this.mark, () => {
           console.log("Record added successfully");

@@ -4,6 +4,7 @@ import {Mark} from "../models/marks.model";
 import {Assignment} from "../models/assignments.model";
 import {DatabaseService} from "../services/database.service";
 import {Router} from "@angular/router";
+import {waitForAsync} from "@angular/core/testing";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ListMarkPageComponent implements OnInit {
               private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    this.database.selectAllMarks().then((data)=>{
+     this.database.selectAllMarks().then((data)=>{
       this.marks = data;
 
 
@@ -34,6 +35,7 @@ export class ListMarkPageComponent implements OnInit {
           }).catch((error)=>{
             console.error(error)
           });
+
         }).catch((error)=>{
           console.error(error)
         });
@@ -57,11 +59,13 @@ export class ListMarkPageComponent implements OnInit {
 
   btnDelete_click(mark: Mark){
     this.database.deleteMark(mark, ()=>{
-      console.log("Mark deleted successfully.");
+
       alert("Mark deleted successfully.");
+
       this.ngZone.run(() => {
-        this.router.navigate(['listMark/']);
+        window.location.reload()
       });
+
     });
   }
 
