@@ -73,12 +73,12 @@
 
         <div>
           <label for="txtWeight" class="form-label">Weight(%)</label>
-          <input type="number" id="txtWeight" name="txtWeight" class="form-control" step ="0.01"
+          <input type="number" id="txtWeight" name="txtWeight" class="form-control" step ="0.01" min="1" max="100"
                  [(ngModel)]="assignment.weight" #weight="ngModel"
                  required>
           <div *ngIf="weight.invalid && (weight.dirty || weight.touched)">
-            <small *ngIf="weight.errors['required']" class="text-danger">
-              Please enter weight of assignment.
+            <small *ngIf="weight.errors" class="text-danger">
+              Please enter weight of assignment in range from 1 to 100.
             </small>
           </div>
         </div>

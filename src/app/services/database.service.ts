@@ -389,7 +389,7 @@ export class DatabaseService {
 
     return new Promise((resolve, reject) => {
       function txFunction(tx) {
-        let sql = "SELECT * FROM courses WHERE id=?;";
+        let sql = "SELECT * FROM assignments WHERE id=?;";
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             let row = results.rows[0];
@@ -446,7 +446,7 @@ export class DatabaseService {
 
     return new Promise((resolve, reject) => {
       function txFunction(tx) {
-        let sql = "SELECT * FROM courses;";
+        let sql = "SELECT * FROM marks;";
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             for (let i = 0; i < results.rows.length; i++) {
@@ -476,7 +476,7 @@ export class DatabaseService {
 
     return new Promise((resolve, reject) => {
       function txFunction(tx) {
-        let sql = "SELECT * FROM courses;";
+        let sql = "SELECT * FROM notes;";
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             for (let i = 0; i < results.rows.length; i++) {
@@ -506,7 +506,37 @@ export class DatabaseService {
 
     return new Promise((resolve, reject) => {
       function txFunction(tx) {
-        let sql = "SELECT * FROM courses;";
+        let sql = "SELECT * FROM assignments;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let a = new Assignment(row['courseId'], row['assignmentNumber'], row['title'], row['dueDate'], row['assignmentFile'], row['fileFormatAttr'], row['fileName'], row['description'], row['weight'], row['isFinished']);
+              a.id = row['id'];
+              assignments.push(a);
+            }
+            resolve(assignments);
+          } else {
+            reject("No assignments found");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
+  public selectAllAssignmentsByCourse(id: number): Promise<any> {
+    let options = [id];
+    let assignments: Assignment[] = [];
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM assignments WHERE courseId = ?;";
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             for (let i = 0; i < results.rows.length; i++) {

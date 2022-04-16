@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Course} from "../models/courses.model";
+import {Mark} from "../models/marks.model";
+import {Assignment} from "../models/assignments.model";
 import {DatabaseService} from "../services/database.service";
 import {Router} from "@angular/router";
-import {Mark} from "../models/marks.model";
+
 
 @Component({
   selector: 'app-list-mark-page',
@@ -11,6 +13,8 @@ import {Mark} from "../models/marks.model";
 })
 export class ListMarkPageComponent implements OnInit {
   marks: Mark[] = []
+  assignment: Assignment = new Assignment();
+  course: Course = new Course();
   constructor(private database: DatabaseService,
               private router: Router) { }
 
@@ -20,6 +24,26 @@ export class ListMarkPageComponent implements OnInit {
     }).catch((error)=>{
       console.error(error)
     });
+  }
+
+  getAssignmentInfo(id:number) : Assignment {
+    this.database.selectAssignment(id).then((data)=>{
+      this.assignment = data;
+    }).catch((error)=>{
+      console.error(error)
+    });
+
+    return this.assignment;
+  }
+
+  getCourseInfo(id:number) : Course {
+    this.database.selectCourse(id).then((data)=>{
+      this.course = data;
+    }).catch((error)=>{
+      console.error(error)
+    });
+
+    return this.course;
   }
 
   btnModify_click(mark: Mark){

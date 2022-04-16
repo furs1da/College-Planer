@@ -18,7 +18,7 @@ import { ListMarkPageComponent } from './list-mark-page/list-mark-page.component
 import { AddMarkPageComponent } from './add-mark-page/add-mark-page.component';
 import { ModifyMarkPageComponent } from './modify-mark-page/modify-mark-page.component';
 import { AboutpageComponent } from './aboutpage/aboutpage.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FooterComponent } from './footer/footer.component';
 import { SettingpageComponent } from './settingpage/settingpage.component';
 
@@ -46,7 +46,8 @@ import { SettingpageComponent } from './settingpage/settingpage.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

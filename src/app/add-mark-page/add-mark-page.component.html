@@ -5,38 +5,49 @@
     </div>
     <div class="card-body">
       <form #myForm="ngForm">
+
         <div>
-          <label for="txtAssignmentId" class="form-label">Assignment #</label>
-          <input type="text" id="txtAssignmentId" name="txtAssignmentId" class="form-control"
-                 [(ngModel)]="mark.assignmentId" #assignmentId="ngModel"
-                 required>
-          <div *ngIf="assignmentId.invalid && (assignmentId.dirty || assignmentId.touched)">
-            <small *ngIf="assignmentId.errors['required']" class="text-danger">
-              Please select assignment that you want to add mark.
+          <label for="cmbCourseId" class="form-label">Course</label>
+          <select [(ngModel)]="courseId" (ngModelChange)="onCourseChange($event)" #txtCourse="ngModel" id="cmbCourseId" name="txtCourse" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of courses">{{i.courseName}}</option>
+          </select>
+          <div *ngIf="txtCourse.invalid && (txtCourse.dirty || txtCourse.touched)">
+            <small *ngIf="txtCourse.errors['required']" class="text-danger">
+              Please select the course.
             </small>
           </div>
         </div>
+
+
+        <div>
+          <label for="cmbCourseId" class="form-label">Assignment</label>
+          <select [(ngModel)]="mark.assignmentId" (ngModelChange)="onAssignmentChange($event)" #txtAssignment="ngModel" id="cmbAssignmentId" name="txtAssignment" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of assignments">{{i.title}}</option>
+          </select>
+          <div *ngIf="txtAssignment.invalid && (txtAssignment.dirty || txtAssignment.touched)">
+            <small *ngIf="txtAssignment.errors['required']" class="text-danger">
+              Please select the assignment.
+            </small>
+          </div>
+        </div>
+
+
 
         <div>
           <label for="txtWeight" class="form-label">Weight(%)</label>
           <input type="text" id="txtWeight" name="txtWeight" class="form-control"
-                 [(ngModel)]="mark.weight" #weight="ngModel"
-                 required>
-          <div *ngIf="weight.invalid && (weight.dirty || weight.touched)">
-            <small *ngIf="weight.errors['required']" class="text-danger">
-              Please provide weight percentage of this assignment.
-            </small>
-          </div>
+                 [(ngModel)]="mark.weight" #weight="ngModel" disabled
+                 >
         </div>
 
         <div>
           <label for="txtGrade" class="form-label">Grade(%)</label>
-          <input type="text" id="txtGrade" name="txtGrade" class="form-control"
+          <input type="number" id="txtGrade" name="txtGrade" class="form-control" step ="0.01" min="1" max="100"
                  [(ngModel)]="mark.grade" #grade="ngModel"
                  required>
           <div *ngIf="grade.invalid && (grade.dirty || grade.touched)">
             <small *ngIf="grade.errors['required']" class="text-danger">
-              Please provide grade of this assignment.
+              Please enter grade of assignment in range from 1 to 100.
             </small>
           </div>
         </div>

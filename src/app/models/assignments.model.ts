@@ -9,7 +9,7 @@ export class Assignment {
   public fileName: string = "";
   public description: string = "";
   public weight: number = 0; //pls check and delete
-  public isFinished: number = -1;  //pls check and delete
+  public isFinished: boolean = false;  //pls check and delete
 
 
 
@@ -22,7 +22,7 @@ export class Assignment {
               fileName?: string,
               description?: string,
               weight?: number,  //pls check and delete
-              isFinished?: number) {
+              isFinished?: boolean) {
     this.courseId = courseId;
     this.assignmentNumber = assignmentNumber;
     this.title = title;

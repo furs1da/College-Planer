@@ -6,16 +6,25 @@
     <div class="card-body">
       <ul class="list-group">
         <li *ngFor="let mark of marks" class="list-group-item">
-          <button type="button" id="btnModify" name="btnModify"
-                  class="btn btn-primary btn-sm me-4"
-                  (click)="btnModify_click(mark)">Modify
-          </button>
+          <div class="card-body">
+            <h4 class="card-title">Title:  {{getAssignmentInfo(mark.id).title}}</h4>
+            <h5 class="card-title">Description:  {{getAssignmentInfo(mark.id).description}}</h5>
+            <h5 class="card-title"> Course:  {{getCourseInfo(getAssignmentInfo(mark.id).courseId).courseCode}}</h5>
+            <p class="card-title">Grade:  {{mark.grade}}</p>
+            <p class="card-text">Weight: {{mark.weight}}</p>
 
-          <button type="button" id="btnDelete" name="btnDelete"
-                  class="btn btn-danger btn-sm me-4"
-                  (click)="btnDelete_click(mark)">Delete
-          </button>
-          {{mark.assignmentId}}
+            <button type="button" id="btnModify" name="btnModify"
+                    class="btn btn-primary btn-sm me-4"
+                    (click)="btnModify_click(mark)">Modify
+            </button>
+
+            <button type="button" id="btnDelete" name="btnDelete"
+                    class="btn btn-danger btn-sm me-4"
+                    (click)="btnDelete_click(mark)">Delete
+            </button>
+          </div>
+
+
         </li>
       </ul>
     </div>

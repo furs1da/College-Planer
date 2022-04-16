@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Assignment} from "../models/assignments.model";
 import {Course} from "../models/courses.model";
 import {DatabaseService} from "../services/database.service";
 import {Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-assignment-page',
@@ -17,7 +18,7 @@ export class AddAssignmentPageComponent implements OnInit {
   assignment:Assignment = new Assignment();
 
   constructor(private database: DatabaseService,
-              private router: Router,
+              private router: Router, private ngZone: NgZone
              ) {
 
   }
@@ -32,7 +33,14 @@ export class AddAssignmentPageComponent implements OnInit {
 
   btnSave_click(){
     this.assignment.weight = +this.assignment.weight.toFixed(2);
-    console.log(this.assignment)
+
+    this.database.insertAssignment(this.assignment,()=>{
+      console.log("Record added successfully");
+      alert("Record added successfully");
+      this.ngZone.run(() => {
+        this.router.navigate(['listAssignment/']);
+      });
+    });
   }
 
   onCourseChange(event){
