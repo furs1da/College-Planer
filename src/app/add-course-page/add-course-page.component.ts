@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgZone } from '@angular/core';
 import {Course} from "../models/courses.model";
 import {DatabaseService} from "../services/database.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-course-page',
@@ -11,7 +13,7 @@ export class AddCoursePageComponent implements OnInit {
   formTitle = 'Add Course';
 
   course:Course = new Course();
-  constructor(private database: DatabaseService) {
+  constructor(private database: DatabaseService, private router: Router, private ngZone: NgZone) {
 
   }
 
@@ -22,6 +24,9 @@ export class AddCoursePageComponent implements OnInit {
     this.database.insertCourse(this.course,()=>{
       console.log("Record added successfully");
       alert("Record added successfully");
+      this.ngZone.run(() => {
+        this.router.navigate(['listCourse/']);
+      });
     });
   }
 }
