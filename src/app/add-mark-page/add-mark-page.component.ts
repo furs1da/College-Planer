@@ -15,7 +15,7 @@ export class AddMarkPageComponent implements OnInit {
   courses: Course[] = []
   courseId: number = -1;
   assignments: Assignment[] = []
-
+  alreadyMarked :boolean = false;
   selectAssignmentDisabled:boolean = true;
 
   mark:Mark = new Mark();
@@ -57,12 +57,22 @@ export class AddMarkPageComponent implements OnInit {
   btnSave_click(){
     this.mark.grade = +this.mark.grade.toFixed(2);
 
-    this.database.insertMarks(this.mark,()=>{
-      console.log("Record added successfully");
-      alert("Record added successfully");
-      this.ngZone.run(() => {
-        this.router.navigate(['listMark/']);
-      });
+    this.database.findMarkByAssignment(this.mark.assignmentId).then((data)=>{
+      if(data != undefined)
+        this.alreadyMarked = true;
+      alert("This assignment already received the mark.");
+      if(!this.alreadyMarked) {
+        this.database.insertMarks(this.mark, () => {
+          console.log("Record added successfully");
+          alert("Record added successfully");
+          this.ngZone.run(() => {
+            this.router.navigate(['listMark/']);
+          });
+        });
+      }
     });
+
+
+
   }
 }

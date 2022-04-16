@@ -330,6 +330,31 @@ export class DatabaseService {
     });
   }
 
+  public findMarkByAssignment(id: number): Promise<any> {
+    let options = [id];
+    let mark: Mark = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM marks WHERE assignmentId=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let mark = new Mark(row['assignmentId'], row['weight'], row['grade']);
+            mark.id = row['id'];
+            resolve(mark);
+          } else {
+            resolve(undefined);
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+          DatabaseService.errorHandler, () => {
+            console.log("Success: select transaction successful");
+          })
+    });
+  }
 
   public selectCourse(id: number): Promise<any> {
     let options = [id];
