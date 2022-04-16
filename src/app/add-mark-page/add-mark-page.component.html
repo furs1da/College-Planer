@@ -20,7 +20,7 @@
 
 
         <div>
-          <label for="cmbCourseId" class="form-label">Assignment</label>
+          <label for="cmbAssignmentId" class="form-label">Assignment</label>
           <select [(ngModel)]="mark.assignmentId" (ngModelChange)="onAssignmentChange($event)" #txtAssignment="ngModel" id="cmbAssignmentId" name="txtAssignment" class="form-control" required>
             <option [value]="i.id" *ngFor="let i of assignments">{{i.title}}</option>
           </select>
