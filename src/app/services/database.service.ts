@@ -206,7 +206,7 @@ export class DatabaseService {
 
   public deleteCourse(course: Course, callback) {
     function txFunction(tx: any): void {
-      let result = confirm("Do you really want to clear Database?");
+      let result = confirm("Do you really want to clear Courses?");
       if (result) {
         let sql = "DELETE FROM courses WHERE id=?;";
         let options = [course.id];
@@ -342,6 +342,58 @@ export class DatabaseService {
             let mark = new Mark(row['assignmentId'], row['grade']);
             mark.id = row['id'];
             resolve(mark);
+          } else {
+            resolve(undefined);
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+          DatabaseService.errorHandler, () => {
+            console.log("Success: select transaction successful");
+          })
+    });
+  }
+
+  public findAssignmentByCourse(id: number): Promise<any> {
+    let options = [id];
+    let assignment: Assignment = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM assignments WHERE courseId=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let assignment = new Assignment(row['courseId'], row['assignmentNumber'], row['title'], row['dueDate'], row['assignmentFile'], row['fileFormatAttr'], row['fileName'], row['description'], row['weight'], row['isFinished']);
+            assignment.id = row['id'];
+            resolve(assignment);
+          } else {
+            resolve(undefined);
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+          DatabaseService.errorHandler, () => {
+            console.log("Success: select transaction successful");
+          })
+    });
+  }
+
+  public findNoteByAssignment(id: number): Promise<any> {
+    let options = [id];
+    let noteItem: Note = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT * FROM notes WHERE assignmentId=?;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            let row = results.rows[0];
+            let noteItem = new Note(row['title'], row['note'], row['noteFile'], row['fileFormatAttr'], row['fileName'], row['assignmentId']);
+            noteItem.id = row['id'];
+            resolve(noteItem);
           } else {
             resolve(undefined);
           }

@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 })
 export class ListCoursePageComponent implements OnInit {
   courses: Course[] = []
+  canBeDeleted:boolean = true;
+
+
   constructor(private database: DatabaseService,
               private router: Router, private ngZone: NgZone) {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
@@ -31,15 +34,25 @@ export class ListCoursePageComponent implements OnInit {
   }
 
   btnDelete_click(course: Course){
-    this.database.deleteCourse(course, ()=>{
+    this.canBeDeleted = true;
+    this.database.findAssignmentByCourse(course.id).then((data)=>{
+      if(data !== undefined) {
+        this.canBeDeleted = false;
+        alert("This course cannot be deleted.");
+      }
+      console.log(this.canBeDeleted);
+      if(this.canBeDeleted) {
+        this.database.deleteCourse(course, ()=>{
 
-      console.log("Course deleted successfully.");
-      alert("Course deleted successfully.");
+          console.log("Course deleted successfully.");
+          alert("Course deleted successfully.");
 
-      this.ngZone.run(() => {
-        this.router.navigate(['listCourse/']);
-      });
+          this.ngZone.run(() => {
+            this.router.navigate(['listCourse/']);
+          });
 
+        });
+      }
     });
   }
 
