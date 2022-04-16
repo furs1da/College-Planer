@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, NgZone, OnInit} from '@angular/core';
 import {Course} from "../models/courses.model";
 import {Mark} from "../models/marks.model";
 import {Assignment} from "../models/assignments.model";
@@ -16,7 +16,7 @@ export class ListMarkPageComponent implements OnInit {
   assignment: Assignment = new Assignment();
   course: Course = new Course();
   constructor(private database: DatabaseService,
-              private router: Router) { }
+              private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.database.selectAllMarks().then((data)=>{
@@ -54,9 +54,10 @@ export class ListMarkPageComponent implements OnInit {
     this.database.deleteMark(mark, ()=>{
       console.log("Mark deleted successfully.");
       alert("Mark deleted successfully.");
+      this.ngZone.run(() => {
+        this.router.navigate(['listMark/']);
+      });
     });
-
-    this.ngOnInit();
   }
 
 
