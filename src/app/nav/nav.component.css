@@ -4,6 +4,6 @@ nav {
 .dropdown-menu .dropdown-item:hover{
   background: darkblue;
 }
-span .navbar-toggler-icon {
+.fa-bars {
   color: white;
 }
