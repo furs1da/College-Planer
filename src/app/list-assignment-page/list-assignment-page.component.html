@@ -15,8 +15,8 @@
             <p class="card-text">Weight: {{assignment.weight}}%</p>
 
             <div [ngSwitch]="assignment.isFinished">
-              <p *ngSwitchCase="'true'">Is Finished? Yes</p>
-              <p *ngSwitchCase="'false'">Is Finished? No</p>
+              <p *ngSwitchCase="'1'">Is Finished? Yes</p>
+              <p *ngSwitchCase="'0'">Is Finished? No</p>
             </div>
 
             <button type="button" id="btnModify" name="btnModify"

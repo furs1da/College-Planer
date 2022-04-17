@@ -30,7 +30,7 @@ export class ModifyAssignmentPageComponent implements OnInit {
         console.info(data);
         this.assignment = data;
         this.formTitle = 'Update Assignment: ' + this.assignment.title;
-        this.onFinishedChange(this.assignment.isFinished);
+
       }).then(() => {
       this.database.selectCourse(this.assignment.courseId).then((data)=>{
         this.course = data;
@@ -43,7 +43,7 @@ export class ModifyAssignmentPageComponent implements OnInit {
   }
 
   onFinishedChange(event){
-    this.assignment.isFinished=event;
+    this.assignment.isFinished = event;
   }
 
 
