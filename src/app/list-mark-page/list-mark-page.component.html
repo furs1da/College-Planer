@@ -10,8 +10,8 @@
             <h4  *ngIf="assignments.length != 0" class="card-title">Title:  {{assignments[i].title}}</h4>
             <p *ngIf="assignments.length != 0" class="card-text">Description:  {{assignments[i].description}}</p>
             <p *ngIf="courses.length != 0" class="card-text"> Course:  {{courses[i].courseCode}}</p>
-            <p class="card-text">Grade:  {{mark.grade}}</p>
-            <p *ngIf="assignments.length != 0" class="card-text">Weight:  {{assignments[i].weight}}</p>
+            <p class="card-text">Grade:  {{mark.grade}}%</p>
+            <p *ngIf="assignments.length != 0" class="card-text">Weight:  {{assignments[i].weight}}%</p>
 
             <button type="button" id="btnModify" name="btnModify"
                     class="btn btn-primary btn-sm me-4"
