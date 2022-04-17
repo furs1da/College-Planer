@@ -606,6 +606,36 @@ export class DatabaseService {
   }
 
 
+  public selectTop3DueAssignments(todayDate: Date): Promise<any> {
+    let options = [];
+    let assignments: Assignment[] = [];
+    console.log(todayDate.getDate() + 'sd')
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT a.id, a.courseId, a.assignmentNumber, a.title, a.dueDate, a.assignmentFile,  a.fileFormatAttr,  a.description,  a.fileName, a.weight, a.isFinished FROM courses c INNER JOIN assignments a ON c.id = a.courseId  WHERE  isFinished = 0 ORDER BY dueDate LIMIT 3;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              let a = new Assignment(row['courseId'], row['assignmentNumber'], row['title'], row['dueDate'], row['assignmentFile'], row['fileFormatAttr'], row['fileName'], row['description'], row['weight'], row['isFinished']);
+              a.id = row['id'];
+              assignments.push(a);
+            }
+            resolve(assignments);
+          } else {
+            resolve(undefined);
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: selectAll transaction successful");
+        })
+    });
+  }
+
+
   public selectAllAssignmentsByCourse(id: number): Promise<any> {
     let options = [id];
     let assignments: Assignment[] = [];

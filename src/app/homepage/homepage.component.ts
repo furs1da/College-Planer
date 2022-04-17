@@ -1,6 +1,10 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Quote} from "../models/quote.model";
-
+import {Assignment} from "../models/assignments.model";
+import {DatabaseService} from "../services/database.service";
+import {Router} from "@angular/router";
+import {Course} from "../models/courses.model";
+import {Mark} from "../models/marks.model";
 
 @Component({
   selector: 'app-homepage',
@@ -15,21 +19,51 @@ import {Quote} from "../models/quote.model";
 export class HomepageComponent implements OnInit {
   title = 'Project Planner';
   quote:Quote = new Quote();
-  randomNumber:number = Math.random();
-  constructor() { }
+
+  assignments: Assignment[] = [];
+  courses: Course[] = [];
+
+  constructor(private database: DatabaseService,
+              private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    this.quote = new Quote();
-    this.randomNumber = Math.random();
 
+    if(localStorage.getItem('day') != new Date().toDateString()) {
     fetch("https://type.fit/api/quotes")
       .then(function(response) {
         return response.json();
       })
       .then(function(data) {
-
-
+        localStorage.setItem('text', data[Math.floor(Math.random() * data.length)]['text']);
+        localStorage.setItem('author', data[Math.floor(Math.random()* data.length)]['author']);
+        localStorage.setItem('day', new Date().toDateString());
       });
+    }
+    this.quote = new Quote(localStorage.getItem('text'), localStorage.getItem('author'));
+
+
+    this.database.selectTop3DueAssignments(new Date()).then((data)=>{
+      if(data !== undefined) {
+      this.assignments = data;
+      }
+      console.log(data)
+    }).then( ()=> {
+      if(this.assignments.length != 0) {
+
+      for(let i=0; i<this.assignments.length; i++){
+        this.database.selectCourse(this.assignments[i].courseId).then((data)=>{
+          console.log(data);
+          this.courses.push(data);
+
+        }).catch((error)=>{
+          console.error(error)
+        });
+      }
+      }
+
+    }).catch((error)=>{
+      console.error(error)
+    });
   }
 
 }

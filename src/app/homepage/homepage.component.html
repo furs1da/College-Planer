@@ -1,0 +1,64 @@
+
+<section class="vh-30" style="background-color: #eee;">
+  <div class="container py-3 h-100s">
+    <div class="row d-flex justify-content-center  h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+
+            <div class="text-center mb-4 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-quotes/bulb.webp" alt="Bulb" width="100">
+            </div>
+
+            <figure class="text-center mb-0">
+              <blockquote class="blockquote">
+                <p class="pb-3">
+                  <i class="fas fa-quote-left fa-xs text-primary"></i>
+                  <span class="lead font-italic">{{quote.text}}</span>
+                  <i class="fas fa-quote-right fa-xs text-primary"></i>
+                </p>
+              </blockquote>
+              <figcaption class="blockquote-footer mb-0">
+                {{quote.author}}
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <div class="card pb-5">
+    <div class="card-header">
+      <h2>Next 3 Due Assignment</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li *ngIf="assignments.length ==0 " class="list-group-item"><h5 class="card-title">No assignments due :)</h5></li>
+        <li *ngFor="let assignment of assignments; index as i" class="list-group-item">
+
+          <div class="card-body">
+            <h4 *ngIf="courses.length != 0" class="card-text"> Course:  {{courses[i].courseCode}}</h4>
+            <h5 class="card-title">Title:  {{assignment.title}}</h5>
+            <p class="card-text">Assignment #: {{assignment.assignmentNumber}}</p>
+            <p class="card-text">Due Date: {{assignment.dueDate}}</p>
+            <p class="card-text">Description: {{assignment.description}}</p>
+            <p class="card-text">Weight: {{assignment.weight}}%</p>
+
+            <div [ngSwitch]="assignment.isFinished">
+              <p *ngSwitchCase="'1'">Is Finished? Yes</p>
+              <p *ngSwitchCase="'0'">Is Finished? No</p>
+            </div>
+
+
+          </div>
+
+
+        </li>
+      </ul>
+    </div>
+  </div>
