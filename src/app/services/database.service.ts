@@ -257,7 +257,7 @@ export class DatabaseService {
   public updateMark(mark: Mark, callback) {
     function txFunction(tx: any): void {
       let sql = "UPDATE marks SET assignmentId=?, grade=? WHERE id=?;";
-      let options = [mark.assignmentId, mark.id];
+      let options = [mark.assignmentId, mark.grade, mark.id];
       tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
     }
 

@@ -6,15 +6,22 @@
     <div class="card-body">
       <form #myForm="ngForm">
         <div>
-          <label for="markId" class="form-label">Mark Id</label>
-          <input type="text" id="markId" name="markId" class="form-control"
-                 [(ngModel)]="mark.id" #weight="ngModel" disabled
+          <label for="markId" class="form-label">Course Code</label>
+          <input type="text" id="markId" name="markId" class="form-control" value="{{course.courseCode}}"
+                 disabled
           >
         </div>
         <div>
-          <label for="assignmentId" class="form-label">Assignment</label>
-          <input type="text" id="assignmentId" name="assignmentId" class="form-control"
-                 [(ngModel)]="mark.assignmentId" #weight="ngModel" disabled
+          <label for="assignmentId" class="form-label">Assignment Title</label>
+          <input type="text" id="assignmentId" name="assignmentId" class="form-control" value="{{assignment.title}}"
+                 disabled
+          >
+        </div>
+
+        <div>
+          <label for="assignmentWeight" class="form-label">Assignment Weight</label>
+          <input type="text" id="assignmentWeight" name="assignmentWeight" class="form-control" value="{{assignment.weight}}"
+                 disabled
           >
         </div>
 

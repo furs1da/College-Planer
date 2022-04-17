@@ -10,11 +10,12 @@ import {Course} from "../models/courses.model";
   templateUrl: './modify-mark-page.component.html',
   styleUrls: ['./modify-mark-page.component.css']
 })
+
 export class ModifyMarkPageComponent implements OnInit {
   mark: Mark = new Mark();
-
-  courses: Course[] = []
-  assignments: Assignment[] = []
+  formTitle : string = "";
+  course: Course =  new Course();
+  assignment: Assignment = new Assignment();
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -28,15 +29,21 @@ export class ModifyMarkPageComponent implements OnInit {
     this.database.selectMark(id).then((data) => {
         console.info(data);
         this.mark = data;
+        this.formTitle = 'Update Mark';
+      }).then(()=>{
+      this.database.selectAssignment(this.mark.assignmentId).then((data)=> {
+        this.assignment = data;
+      }).then(()=>{
+        this.database.selectCourse(this.assignment.courseId).then((data)=> {
+          this.course = data;
+      })})
       })
       .catch((e) => {
         console.error(e);
       });
-
-
   }
 
-  formTitle = 'Update Mark';
+
 
 
   btnUpdate_click() {
