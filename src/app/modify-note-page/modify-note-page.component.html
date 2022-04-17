@@ -7,27 +7,14 @@
       <form #myForm="ngForm">
 
         <div>
-          <label for="cmbCourseId" class="form-label">Course</label>
-          <select [(ngModel)]="courseId" (ngModelChange)="onCourseChange($event)" #txtCourse="ngModel" id="cmbCourseId" name="txtCourse" class="form-control" required>
-            <option [value]="i.id" *ngFor="let i of courses">{{i.courseName}}</option>
-          </select>
-          <div *ngIf="txtCourse.invalid && (txtCourse.dirty || txtCourse.touched)">
-            <small *ngIf="txtCourse.errors['required']" class="text-danger">
-              Please select the course.
-            </small>
-          </div>
+          <label for="markId" class="form-label">Course Code</label>
+          <input type="text" id="markId" name="markId" class="form-control" value="{{course.courseCode}}"
+                 disabled>
         </div>
-
         <div>
-          <label for="cmbCourseId" class="form-label">Assignment</label>
-          <select [(ngModel)]="note.assignmentId" (ngModelChange)="onAssignmentChange($event)" #txtAssignment="ngModel" id="cmbAssignmentId" name="txtAssignment" class="form-control" required>
-            <option [value]="i.id" *ngFor="let i of assignments">{{i.title}}</option>
-          </select>
-          <div *ngIf="txtAssignment.invalid && (txtAssignment.dirty || txtAssignment.touched)">
-            <small *ngIf="txtAssignment.errors['required']" class="text-danger">
-              Please select the assignment.
-            </small>
-          </div>
+          <label for="assignmentId" class="form-label">Assignment Title</label>
+          <input type="text" id="assignmentId" name="assignmentId" class="form-control" value="{{assignment.title}}"
+                 disabled>
         </div>
 
         <div>

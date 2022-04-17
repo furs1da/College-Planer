@@ -13,10 +13,8 @@ import {Course} from "../models/courses.model";
 export class ModifyNotePageComponent implements OnInit {
   formTitle : string = "";
   note: Note = new Note();
-  courses: Course[] = [];
-  courseId: number = -1;
-  assignments: Assignment[] = [];
-  selectAssignmentDisabled:boolean = true;
+  course: Course =  new Course();
+  assignment: Assignment = new Assignment();
 
   constructor(private activatedRoute: ActivatedRoute,
               private database: DatabaseService,
@@ -25,31 +23,26 @@ export class ModifyNotePageComponent implements OnInit {
 
   ngOnInit(): void {
     let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.database.selectNote(id)
-      .then((data) => {
-        console.info(data);
-        this.note = data;
-        this.formTitle = 'Modify Note: ' + this.note.title;
-      })
+
+
+    this.database.selectNote(id).then((data) => {
+      console.info(data);
+      this.note = data;
+      this.formTitle = 'Update Mark';
+    }).then(()=>{
+      this.database.selectAssignment(this.note.assignmentId).then((data)=> {
+        this.assignment = data;
+      }).then(()=>{
+        this.database.selectCourse(this.assignment.courseId).then((data)=> {
+          this.course = data;
+        })})
+    })
       .catch((e) => {
         console.error(e);
       });
   }
-  onCourseChange(event){
-    this.courseId = event;
-    this.selectAssignmentDisabled = false;
-    this.note.assignmentId = undefined;
 
-    this.database.selectAllAssignmentsByCourse(this.courseId).then((data)=>{
-      this.assignments = data;
-    }).catch((error)=>{
-      console.error(error)
-    });
-  }
 
-  onAssignmentChange(event){
-    this.note.assignmentId = event;
-  }
   btnUpdate_click() {
     this.database.updateNote(this.note, () => {
       console.log("Note updated successfully");
