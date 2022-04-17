@@ -606,13 +606,13 @@ export class DatabaseService {
   }
 
 
-  public selectTop3DueAssignments(todayDate: Date): Promise<any> {
-    let options = [];
+  public selectTop3DueAssignments(todayDate: string): Promise<any> {
+    let options = [todayDate];
     let assignments: Assignment[] = [];
-    console.log(todayDate.getDate() + 'sd')
+    console.log(todayDate)
     return new Promise((resolve, reject) => {
       function txFunction(tx) {
-        let sql = "SELECT a.id, a.courseId, a.assignmentNumber, a.title, a.dueDate, a.assignmentFile,  a.fileFormatAttr,  a.description,  a.fileName, a.weight, a.isFinished FROM courses c INNER JOIN assignments a ON c.id = a.courseId  WHERE  isFinished = 0 ORDER BY dueDate LIMIT 3;";
+        let sql = "SELECT a.id, a.courseId, a.assignmentNumber, a.title, a.dueDate, a.assignmentFile,  a.fileFormatAttr,  a.description,  a.fileName, a.weight, a.isFinished FROM courses c INNER JOIN assignments a ON c.id = a.courseId  WHERE isFinished = 0 AND dueDate > ? ORDER BY dueDate LIMIT 3;";
         tx.executeSql(sql, options, function (tx, results) {
           if (results.rows.length > 0) {
             for (let i = 0; i < results.rows.length; i++) {

@@ -19,9 +19,10 @@ import {Mark} from "../models/marks.model";
 export class HomepageComponent implements OnInit {
   title = 'Project Planner';
   quote:Quote = new Quote();
-
+  todayDate:Date = new Date();
   assignments: Assignment[] = [];
   courses: Course[] = [];
+  dateString:string = "";
 
   constructor(private database: DatabaseService,
               private router: Router, private ngZone: NgZone) { }
@@ -41,8 +42,10 @@ export class HomepageComponent implements OnInit {
     }
     this.quote = new Quote(localStorage.getItem('text'), localStorage.getItem('author'));
 
+    this.todayDate = new Date();
+    this.dateString = this.todayDate.getFullYear() +'-' +(((this.todayDate.getMonth()+1) > 9) ? (this.todayDate.getMonth()+1) : ('0' + (this.todayDate.getMonth()+1) )) + '-' + ((this.todayDate.getDate() > 9) ? this.todayDate.getDate() : ('0' + this.todayDate.getDate()))
 
-    this.database.selectTop3DueAssignments(new Date()).then((data)=>{
+    this.database.selectTop3DueAssignments(this.dateString).then((data)=>{
       if(data !== undefined) {
       this.assignments = data;
       }
