@@ -1,15 +1,15 @@
-<div class="container-fluid">
-  <div class="card mt-4">
+<div class="container-fluid pb-5">
+  <div class="card mt-4 ">
     <div class="card-header">
       <h2>{{formTitle}}</h2>
     </div>
     <div class="card-body">
       <form #myForm="ngForm">
+
         <div>
-          <label for="cmbCourseId" class="form-label">Course</label>
-          <input type="number" id="cmbCourseId" name="cmbCourseId" class="form-control"
-                 [(ngModel)]="assignment.courseId" #courseId="ngModel"
-                 readonly>
+          <label for="txtCourseCode" class="form-label">Course Code:</label>
+          <input type="text" id="txtCourseCode" name="txtCourseCode" class="form-control" value="{{course.courseCode}}"
+                 disabled>
         </div>
 
 

@@ -11,9 +11,6 @@ import {Course} from "../models/courses.model";
 })
 export class ModifyAssignmentPageComponent implements OnInit {
 
-  assignments: Assignment[] = [];
-  courses: Course[] = [];
-
   assignment: Assignment = new Assignment();
   course: Course = new Course();
 
@@ -26,40 +23,29 @@ export class ModifyAssignmentPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.database.selectAllAssignments()
-      .then((data) => {
-        this.assignments = data;
-      }).then(()=>{
-        for (let i = 0; i<this.assignments.length; i++){
-          this.database.selectCourse(this.assignments[i].courseId).then((data)=>{
-            this.courses.push(data);
-          }).catch((error)=>{
-            console.error(error)
-          });
-        }
+    let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
-    }).catch((e) => {
+    this.database.selectAssignment(id)
+      .then((data) => {
+        console.info(data);
+        this.assignment = data;
+        this.formTitle = 'Update Assignment: ' + this.assignment.title;
+      }).then(() => {
+      this.database.selectCourse(this.assignment.courseId).then((data)=>{
+        this.course = data;
+      }).catch((error)=>{
+        console.error(error)
+      });}).catch((e) => {
         console.error(e);
       });
 
-
-    let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-
-
-    //even these two show undefined.
-    console.log("RESULT")
-    console.info(this.assignments[id]);
-    console.info(this.courses[this.assignment.courseId]);
-
-    this.formTitle =  + this.course.courseCode + '' + this.course.courseName +
-      'Update Assignment: #' + this.assignment.assignmentNumber;
   }
 
 
 
   btnUpdate_click() {
     let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.database.updateAssignment(this.assignments[id], () => {
+    this.database.updateAssignment(this.assignment, () => {
       console.log("Assignment updated successfully");
       alert("Assignment updated successfully");
     });
