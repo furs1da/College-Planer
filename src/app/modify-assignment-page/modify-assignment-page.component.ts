@@ -11,8 +11,13 @@ import {Course} from "../models/courses.model";
 })
 export class ModifyAssignmentPageComponent implements OnInit {
 
+  assignments: Assignment[] = [];
+  courses: Course[] = [];
+
   assignment: Assignment = new Assignment();
   course: Course = new Course();
+
+  formTitle : string = "";
 
   constructor(private activatedRoute: ActivatedRoute,
               private database: DatabaseService,
@@ -21,34 +26,40 @@ export class ModifyAssignmentPageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.database.selectAllAssignments()
+      .then((data) => {
+        this.assignments = data;
+      }).then(()=>{
+        for (let i = 0; i<this.assignments.length; i++){
+          this.database.selectCourse(this.assignments[i].courseId).then((data)=>{
+            this.courses.push(data);
+          }).catch((error)=>{
+            console.error(error)
+          });
+        }
+
+    }).catch((e) => {
+        console.error(e);
+      });
+
+
     let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    console.log(`id is ${id}`);
-    this.database.selectAssignment(id)
-      .then((data) => {
-        console.info(data);
-        this.assignment = data;
-      })
-      .catch((e) => {
-        console.error(e);
-      });
 
-    //can't access this.assignment
-    this.database.selectCourse(this.assignment.courseId)
-      .then((data) => {
-        console.info(data);
-        this.course = data;
-      })
-      .catch((e) => {
-        console.error(e);
-      });
 
+    //even these two show undefined.
+    console.log("RESULT")
+    console.info(this.assignments[id]);
+    console.info(this.courses[this.assignment.courseId]);
+
+    this.formTitle =  + this.course.courseCode + '' + this.course.courseName +
+      'Update Assignment: #' + this.assignment.assignmentNumber;
   }
 
-  formTitle =  + this.course.courseCode + '' + this.course.courseName +
-    'Update Assignment: #' + this.assignment.assignmentNumber;
+
 
   btnUpdate_click() {
-    this.database.updateAssignment(this.assignment, () => {
+    let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    this.database.updateAssignment(this.assignments[id], () => {
       console.log("Assignment updated successfully");
       alert("Assignment updated successfully");
     });

@@ -78,29 +78,39 @@
           </div>
         </div>
 
-        <div>
-          <label for="isFinished" class="form-label">Is Finished</label>
-          <select name="isFinished" id="isFinished" class="form-control"
-                  [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
-                  required>
-            <div *ngIf="assignment.isFinished == true">
-              <option [ngValue]="true" selected>Yes</option>
-              <option [ngValue]="false">No</option>
-            </div>
-            <div *ngIf="assignment.isFinished == false">
+        <div [ngSwitch]="assignment.isFinished">
+          <div *ngSwitchCase="'false'" >
+            <label for="isFinished1" class="form-label">Is Finished</label>
+            <select name="isFinished" id="isFinished1" class="form-control"
+                    [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
+                    required value="Yes">
               <option [ngValue]="true">Yes</option>
-              <option [ngValue]="false" selected>No</option>
-            </div>
+              <option [ngValue]="false" >No</option>
 
-            <option [ngValue]="true">Yes</option>
-            <option [ngValue]="false" selected>No</option>
-          </select>
-          <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
-            <small *ngIf="isFinished.errors['required']" class="text-danger">
-              Please enter status.
-            </small>
+            </select>
+            <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
+              <small *ngIf="isFinished.errors['required']" class="text-danger">
+                Please enter status.
+              </small>
+            </div>
+          </div>
+          <div *ngSwitchCase="'true'" >
+            <label for="isFinished2" class="form-label">Is Finished</label>
+            <select name="isFinished" id="isFinished2" class="form-control"
+                    [(ngModel)]="assignment.isFinished" #isFinished="ngModel"
+                    required value="Yes">
+              <option [ngValue]="true" >Yes</option>
+              <option [ngValue]="false" >No</option>
+
+            </select>
+            <div *ngIf="isFinished.invalid && (isFinished.dirty || isFinished.touched)">
+              <small *ngIf="isFinished.errors['required']" class="text-danger">
+                Please enter status.
+              </small>
+            </div>
           </div>
         </div>
+
 
         <div class="mt-5">
           <button class="btn btn-primary" id="btnSave" name="btnSave"
