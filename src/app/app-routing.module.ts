@@ -15,6 +15,7 @@ import {ModifyMarkPageComponent} from "./modify-mark-page/modify-mark-page.compo
 import {ModifyNotePageComponent} from "./modify-note-page/modify-note-page.component";
 import {AboutpageComponent} from "./aboutpage/aboutpage.component";
 import {SettingpageComponent} from "./settingpage/settingpage.component";
+import {MarkCalculatorPageComponent} from "./mark-calculator-page/mark-calculator-page.component";
 
 
 const routes: Routes = [
@@ -33,7 +34,9 @@ const routes: Routes = [
   {path: "modifyMark/:id", component: ModifyMarkPageComponent},
   {path: "modifyNote/:id", component: ModifyNotePageComponent},
   {path: "about", component: AboutpageComponent},
-  {path: "setting", component: SettingpageComponent}
+  {path: "setting", component: SettingpageComponent},
+  {path: "markCalculate", component: MarkCalculatorPageComponent}
+
 
 ];
 

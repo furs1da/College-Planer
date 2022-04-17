@@ -21,6 +21,7 @@ import { AboutpageComponent } from './aboutpage/aboutpage.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FooterComponent } from './footer/footer.component';
 import { SettingpageComponent } from './settingpage/settingpage.component';
+import { MarkCalculatorPageComponent } from './mark-calculator-page/mark-calculator-page.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SettingpageComponent } from './settingpage/settingpage.component';
     ModifyMarkPageComponent,
     AboutpageComponent,
     FooterComponent,
-    SettingpageComponent
+    SettingpageComponent,
+    MarkCalculatorPageComponent
   ],
   imports: [
     BrowserModule,
