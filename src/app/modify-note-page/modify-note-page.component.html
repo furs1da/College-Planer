@@ -1,1 +1,76 @@
-<p>modify-note-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+
+        <div>
+          <label for="cmbCourseId" class="form-label">Course</label>
+          <select [(ngModel)]="courseId" (ngModelChange)="onCourseChange($event)" #txtCourse="ngModel" id="cmbCourseId" name="txtCourse" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of courses">{{i.courseName}}</option>
+          </select>
+          <div *ngIf="txtCourse.invalid && (txtCourse.dirty || txtCourse.touched)">
+            <small *ngIf="txtCourse.errors['required']" class="text-danger">
+              Please select the course.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="cmbCourseId" class="form-label">Assignment</label>
+          <select [(ngModel)]="note.assignmentId" (ngModelChange)="onAssignmentChange($event)" #txtAssignment="ngModel" id="cmbAssignmentId" name="txtAssignment" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of assignments">{{i.title}}</option>
+          </select>
+          <div *ngIf="txtAssignment.invalid && (txtAssignment.dirty || txtAssignment.touched)">
+            <small *ngIf="txtAssignment.errors['required']" class="text-danger">
+              Please select the assignment.
+            </small>
+          </div>
+        </div>
+
+        <div>
+          <label for="txtTitle" class="form-label">Note Title</label>
+          <input type="text" id="txtTitle" name="txtTitle" class="form-control"
+                 [(ngModel)]="note.title" #title="ngModel"
+                 required>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)">
+            <small *ngIf="title.errors['required']" class="text-danger">
+              Please provide note title.
+            </small>
+          </div>
+        </div>
+        <p>
+          *replace this p tag with fields following:*<br>
+          noteFile, fileFormatAttr, fileName
+        </p>
+        <div>
+          <label for="txtNote" class="form-label">Note</label>
+          <input type="textarea" id="txtNote" name="txtNote" class="form-control"
+                 [(ngModel)]="note.note" #Note="ngModel"
+                 required>
+          <div *ngIf="Note.invalid && (Note.dirty || Note.touched)">
+            <small *ngIf="Note.errors['required']" class="text-danger">
+              Please provide note.
+            </small>
+          </div>
+        </div>
+
+
+
+        <div class="mt-5">
+          <button class="btn btn-primary" id="btnSave" name="btnSave"
+                  [disabled]="myForm.invalid"
+                  (click)="btnUpdate_click()">
+            Update
+          </button>
+          <button class="btn btn-danger" id="btnCancel" name="btnCancel"
+                  (click)="btnCancel_click()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

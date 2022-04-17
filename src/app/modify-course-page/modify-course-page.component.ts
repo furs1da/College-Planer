@@ -33,6 +33,8 @@ export class ModifyCoursePageComponent implements OnInit {
       });
   }
 
+
+
   btnUpdate_click() {
     this.database.updateCourse(this.course, () => {
       console.log("Course updated successfully");

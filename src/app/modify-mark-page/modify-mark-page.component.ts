@@ -25,8 +25,7 @@ export class ModifyMarkPageComponent implements OnInit {
   ngOnInit(): void {
     let id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     console.log(`id is ${id}`);
-    this.database.selectMark(id)
-      .then((data) => {
+    this.database.selectMark(id).then((data) => {
         console.info(data);
         this.mark = data;
       })

@@ -6,17 +6,22 @@
     <div class="card-body">
       <form #myForm="ngForm">
         <div>
+          <label for="markId" class="form-label">Mark Id</label>
+          <input type="text" id="markId" name="markId" class="form-control"
+                 [(ngModel)]="mark.id" #weight="ngModel" disabled
+          >
+        </div>
+        <div>
           <label for="assignmentId" class="form-label">Assignment</label>
           <input type="text" id="assignmentId" name="assignmentId" class="form-control"
                  [(ngModel)]="mark.assignmentId" #weight="ngModel" disabled
           >
         </div>
 
-
-
         <div>
           <label for="txtGrade" class="form-label">Grade(%)</label>
-          <input type="number" id="txtGrade" name="txtGrade" class="form-control" step ="0.01" min="1" max="100"
+          <input type="number" id="txtGrade" name="txtGrade" class="form-control"
+                 step ="0.01" min="1" max="100"
                  [(ngModel)]="mark.grade" #grade="ngModel"
                  value="{{mark.grade}}"
                  required>
