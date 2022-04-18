@@ -48,6 +48,7 @@ export class AddMarkPageComponent implements OnInit {
 
   onAssignmentChange(event){
     this.mark.assignmentId = event;
+    this.alreadyMarked = false;
     this.database.selectAssignment(this.mark.assignmentId).then((data)=>{
       this.weightMark = data.weight;
     }).catch((error)=>{

@@ -1,1 +1,30 @@
-<p>mark-calculator-page works!</p>
+<div class="container-fluid">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h2>{{formTitle}}</h2>
+    </div>
+    <div class="card-body">
+      <form #myForm="ngForm">
+
+        <div class="mb-3">
+          <label for="cmbCourseId" class="form-label">Course</label>
+          <select [(ngModel)]="courseId" (ngModelChange)="onCourseChange($event)" #txtCourse="ngModel" id="cmbCourseId" name="txtCourse" class="form-control" required>
+            <option [value]="i.id" *ngFor="let i of courses">{{i.courseName}}</option>
+          </select>
+          <div *ngIf="txtCourse.invalid && (txtCourse.dirty || txtCourse.touched)">
+            <small *ngIf="txtCourse.errors['required']" class="text-danger">
+              Please select the course.
+            </small>
+          </div>
+        </div>
+        <div *ngIf="noResults==''">
+        <p><b>Achieved result:</b> {{courseResult.achieved}} / 100</p>
+        <p><b>Average mark:</b> {{courseResult.average}}%</p>
+        </div>
+        <div *ngIf="noResults!=''">
+          <p><b>{{noResults}}</b></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

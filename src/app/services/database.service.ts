@@ -3,6 +3,7 @@ import {Assignment} from "../models/assignments.model";
 import {Course} from "../models/courses.model";
 import {Note} from "../models/notes.model";
 import {Mark} from "../models/marks.model";
+import {CourseResults} from "../models/courseResults";
 
 declare function openDatabase(shortName, version, displayName, dbSize, dbCreateSuccess): any;
 
@@ -664,6 +665,41 @@ export class DatabaseService {
         })
     });
   }
+
+
+
+
+  public calculateCourse(id: number): Promise<any> {
+    let options = [id];
+    let courseResult: CourseResults = null;
+
+    return new Promise((resolve, reject) => {
+      function txFunction(tx) {
+        let sql = "SELECT SUM(m.grade * a.weight / 100) AS achieved, (SUM(m.grade * a.weight)/SUM( a.weight)) AS average FROM courses AS c INNER JOIN assignments AS a ON c.id = a.courseId INNER JOIN marks AS m ON a.id = m.assignmentId WHERE c.id = ? GROUP BY c.id;";
+        tx.executeSql(sql, options, function (tx, results) {
+          if (results.rows.length > 0) {
+            for (let i = 0; i < results.rows.length; i++) {
+              let row = results.rows[i];
+              console.log(row);
+              courseResult = new CourseResults(row['achieved'], row['average']);
+
+            }
+            resolve(courseResult);
+          } else {
+            resolve(undefined);
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDatabase().transaction(txFunction,
+        DatabaseService.errorHandler, () => {
+          console.log("Success: calculateCourse transaction successful");
+        })
+    });
+  }
+
+
+
 
 
 }
