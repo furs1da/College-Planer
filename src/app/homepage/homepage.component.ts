@@ -24,11 +24,13 @@ export class HomepageComponent implements OnInit {
   courses: Course[] = [];
   dateString:string = "";
 
+
   constructor(private database: DatabaseService,
               private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('day'));
+
+
     if(localStorage.getItem('day') != new Date().toDateString()) {
     fetch("https://type.fit/api/quotes")
       .then(function(response) {
