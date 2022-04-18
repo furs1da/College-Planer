@@ -28,7 +28,7 @@ export class HomepageComponent implements OnInit {
               private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-
+    console.log(localStorage.getItem('day'));
     if(localStorage.getItem('day') != new Date().toDateString()) {
     fetch("https://type.fit/api/quotes")
       .then(function(response) {
@@ -38,8 +38,12 @@ export class HomepageComponent implements OnInit {
         localStorage.setItem('text', data[Math.floor(Math.random() * data.length)]['text']);
         localStorage.setItem('author', data[Math.floor(Math.random()* data.length)]['author']);
         localStorage.setItem('day', new Date().toDateString());
-      });
+      }).finally(()=>
+    {
+      this.quote = new Quote(localStorage.getItem('text'), localStorage.getItem('author'));
+    });
     }
+    if(this.quote.author === undefined)
     this.quote = new Quote(localStorage.getItem('text'), localStorage.getItem('author'));
 
     this.todayDate = new Date();
