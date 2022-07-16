@@ -57,6 +57,6 @@ Demonstration of the work of the website:
 - Usage of WebSQL in Angular;
 - Usage of API;
 - CRUD operations using WebSQL;
-- Enchanced my skills of making cross-table queries;
+- Enhanced my skills of making cross-table queries;
 - Deploying Angular application to Github Pages.
 
