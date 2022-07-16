@@ -13,7 +13,9 @@ List of functionality:
 - [Using cross-table queries to calculate of the final grade for each course and top 3 due assignments](#homepage); 
 - [Fully responsive, using WebSQL to manage the work with tables](#responsive).
 
+<br/>
 
+[Things I have learned while developing this project ⬇](#learned-things)
 
 Demonstration of the work of the website:
 
@@ -37,3 +39,13 @@ Demonstration of the work of the website:
 
 7. <a id="responsive">Fully responsive, using WebSQL to manage the work with tables</a> <br/>
 ![responsive](https://user-images.githubusercontent.com/45331164/179372723-d18ed1f8-3b97-453b-a50e-dba292af236f.gif)
+
+
+
+
+<hr/>
+
+<a id="learned-things"><b>Things I have learned or enhanced while developing this project:</b></a>
+
+- Basic Typescript
+
