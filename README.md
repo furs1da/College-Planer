@@ -47,5 +47,11 @@ Demonstration of the work of the website:
 
 <a id="learned-things"><b>Things I have learned or enhanced while developing this project:</b></a>
 
-- Basic Typescript
+- Angular;
+- Typescript;
+- Enhanced my skill of using Bootstrap;
+- Usage of WebSQL in Angular;
+- Usage of API;
+- CRUD operations using WebSQL;
+- Enchanced my skill of making cross-table queries.
 
