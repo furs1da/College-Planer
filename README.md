@@ -1,5 +1,5 @@
 # College Planner
-A handy website that helps to organize your assignments, marks, and notes in your College written in Angular using WebSQL.
+A handy website that helps to organize your assignments, marks, and notes in your College written in Angular using WebSQL. <br/>
 Live Demo - https://furs1da.github.io/College-Planer/
 
 List of functionality:
