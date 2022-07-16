@@ -11,6 +11,7 @@ List of functionality:
 - [Add, edit, delete notes](#notes);
 - [Using API for generating daily quote](#homepage);
 - [Using cross-table queries to calculate of the final grade for each course and top 3 due assignments](#homepage); 
+- [About and Settings page](#about);
 - [Fully responsive, using WebSQL to manage the work with tables](#responsive).
 
 <br/>
@@ -37,7 +38,10 @@ Demonstration of the work of the website:
 6. <a id="homepage">Using cross-table queries to calculate of the final grade for each course and top 3 due assignments</a> <br/>
 ![homepage](https://user-images.githubusercontent.com/45331164/179372719-46b11d52-b7b0-4358-aa28-45aae4cc6a93.gif)
 
-7. <a id="responsive">Fully responsive, using WebSQL to manage the work with tables</a> <br/>
+7. <a id="about">About and Settings page</a> <br/>
+![about](https://user-images.githubusercontent.com/45331164/179373297-70ab9a1b-c480-440f-a995-b6e3545f4e55.gif)
+
+8. <a id="responsive">Fully responsive, using WebSQL to manage the work with tables</a> <br/>
 ![responsive](https://user-images.githubusercontent.com/45331164/179372723-d18ed1f8-3b97-453b-a50e-dba292af236f.gif)
 
 
